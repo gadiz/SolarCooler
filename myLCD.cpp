@@ -112,6 +112,14 @@ void myLCD::HandleBackLight()
       offCount = true;
   }
 }
+void myLCD::wait(unsigned long milSec) //  do this to avoid calling dalay during timer callback
+{
+  unsigned long milBegin = millis();
+  unsigned long mil = milBegin;
+  do{
+    mil = millis();
+  }while (mil - milBegin < milSec);
+}
 int myLCD::waitButton()
 {
   int buttonPressed; 

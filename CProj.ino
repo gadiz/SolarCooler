@@ -64,7 +64,7 @@ void sampleTemp() // This is called via a timer interupt every 5 seconds
     }
     if (ki == KOPENMANUAL){
       OpenWater();
-      delay(250000);
+      lcd.wait(5000);
       CloseWater();
     }
   }

@@ -15,6 +15,7 @@
      void printNumOpens(int numOpens);
      void printTotalDuration(int totalDuration);
      int waitButton();
+     void wait(unsigned long milSec);
      void waitReleaseButton();
      // void keyPadHandle();
      keyPadInstruct keyPadInterrupt();
