@@ -46,7 +46,7 @@ void myLCD::setup()
  // digitalWrite(backLight, LOW); // turn backlight on. Replace 'HIGH' with 'LOW' to turn it off.
 
 }
-void myLCD::updateData(float thermReading , int numOpens , int totalDuration)
+void myLCD::updateData(float thermReading , int numOpens , int totalDuration , int ldr)
 {
   switch (m_Mode){
     case MTEMP:
@@ -57,6 +57,9 @@ void myLCD::updateData(float thermReading , int numOpens , int totalDuration)
       break;
     case MDURATION:
       printTotalDuration(totalDuration);
+      break;
+      case MLDR:
+      printLDR(ldr);
       break;
     default:
       break;
@@ -77,7 +80,7 @@ keyPadInstruct myLCD::keyPadInterrupt()// Called every 0.1 seconds , return true
     case KEYPAD_NONE:
       break;
     case KEYPAD_SELECT:
-     md = (md +1) % 3;
+     md = (md +1) % 4;
      m_Mode = (mode)md;
      rc = KUPDATE;
       break;
@@ -98,7 +101,7 @@ int onCount = 0;
 bool offCount = true;
 void myLCD::HandleBackLight()
 {
-  if (onCount > 10000){
+  if (onCount > 100000){
       backLightOff();
       offCount = false;
   }
@@ -187,6 +190,12 @@ void myLCD::printTemp(float thermReading)
    clearLine(2);
    m_lcd.print("Num Opens = ");
    m_lcd.print(numOpens);
+ }
+ void myLCD::printLDR(int ldr)
+ {
+    clearLine(2);
+   m_lcd.print("LDR = ");
+   m_lcd.print(ldr);
  }
  void myLCD::printTotalDuration(int totalDuration)
  {

@@ -1,0 +1,31 @@
+==================================================
+ldr lib
+==================================================
+= Copyright (c) Davide Gironi, 2012              =
+= http://davidegironi.blogspot.it/               =
+==================================================
+
+
+A photoresistor or light dependent resistor (LDR) is a resistor whose
+resistance decreases with increasing incident light intensity; in other
+words, it exhibits photoconductivity.
+The lux (symbol: lx) is the SI unit of illuminance and luminous emittance,
+measuring luminous flux per unit area.
+This library implements a way to estimate lux given a LDR resistance value
+read from an ADC input pin of an AVR Atmega.
+The estimation is based on this forumla:
+lux = A*((R/B)^C)
+where R is the LDR resistance.
+An Excel spreadsheet is provided to help the estimation of A, B and C values
+You have to read lux values using a calibrated luxmeter, and R values of your
+LDR, write it down on the Excel sheet, and estimate A, B and C.
+
+
+Devel Notes
+-----------
+This library was developed on Eclipse, built with avr-gcc on Atmega8 @ 1MHz.
+
+
+License
+-------
+Please refer to LICENSE file for licensing information.

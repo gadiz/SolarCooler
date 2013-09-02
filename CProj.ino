@@ -26,6 +26,7 @@ void setup() {
   
 }
 int thermistorPin = A1;
+int LDRPin = A2;
 float lastCels=0;
 float thermReading = 0;
 
@@ -46,25 +47,34 @@ int totalDuration = 0;
 void sampleTemp() // This is called via a timer interupt every 5 seconds
 {
   timerCount += timerInterval;// 1/10 of a second
-  if (timerCount > (timerInterval * 50)){// Every 5 seconds
+  if (timerCount > (timerInterval * 10)){// Every 5 seconds
     thermReading = therm.Temperature();  
+    // Need to replace this with an LDR reading instead
     digitalWrite(led, HIGH);
       //delay(1000); 
     //float tmpCel = therm.Temperature();
     Serial.print(thermReading);
     Serial.println(",");
+    //analogReference(INTERNAL);
+    //digitalWrite(LDRPin, LOW);
+   // delay(500);
+    int LDRReading = analogRead(LDRPin); 
+    //delay(500);
+    //analogReference(DEFAULT);
+    //delay(500);
     //digitalWrite(led, LOW);
-    lcd.updateData(thermReading , numOpens , totalDuration);
+    lcd.updateData(thermReading , numOpens , totalDuration , LDRReading);
     //lcd.printTemp(thermReading);
     timerCount = 0;
   }else{
     keyPadInstruct ki = lcd.keyPadInterrupt();
     if (ki == KUPDATE){
-      lcd.updateData(thermReading , numOpens , totalDuration);
+      lcd.updateData(thermReading , numOpens , totalDuration , 0);
     }
     if (ki == KOPENMANUAL){
       OpenWater();
-      lcd.wait(5000);
+      //lcd.wait(5000);
+      delay(250000);
       CloseWater();
     }
   }
