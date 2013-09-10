@@ -101,7 +101,7 @@ int onCount = 0;
 bool offCount = true;
 void myLCD::HandleBackLight()
 {
-  if (onCount > 100000){
+  if (onCount > 20000){
       backLightOff();
       offCount = false;
   }

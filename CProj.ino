@@ -1,6 +1,6 @@
 
 #include <arduino.h>
-#include <Thermister.h>
+#include "thermistor.h"
 #include <TimerOne.h>
 #include <LiquidCrystal.h>
 #include <LCDKeypad.h>
@@ -30,7 +30,7 @@ int LDRPin = A2;
 float lastCels=0;
 float thermReading = 0;
 
-thermister therm(thermistorPin,thermister::T_CELSIUS,3977.0f , 298.15f , 10000.0f ,10000.0f);
+thermistor therm(thermistorPin,thermistor::T_CELSIUS,3977.0f , 298.15f , 10000.0f ,10000.0f);
 // the loop routine runs over and over again forever:
   void openEvery(int time)
 {
