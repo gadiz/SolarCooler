@@ -36,7 +36,7 @@ void myLCD::setup()
   // set up the LCD's number of columns and rows: 
   m_lcd.begin(16, 2);
   // Print a message to the LCD.
-  m_lcd.print("Solar Cooler 1.0");
+  m_lcd.print("PVCooler 1.0");
   m_lcd.setCursor(0,2);
   m_lcd.print("Processing...");
   m_lcd.createChar(0, degree);
