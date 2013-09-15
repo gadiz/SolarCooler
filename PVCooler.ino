@@ -27,6 +27,7 @@ void setup() {
 }
 int thermistorPin = A1;
 int LDRPin = A2;
+int LDRReading = 0;
 float lastCels=0;
 float thermReading = 0;
 
@@ -53,12 +54,12 @@ void sampleTemp() // This is called via a timer interupt every 5 seconds
     digitalWrite(led, HIGH);
       //delay(1000); 
     //float tmpCel = therm.Temperature();
-    Serial.print(thermReading);
-    Serial.println(",");
+    //Serial.print(thermReading);
+    //Serial.println(",");
     //analogReference(INTERNAL);
     //digitalWrite(LDRPin, LOW);
    // delay(500);
-    int LDRReading = analogRead(LDRPin); 
+    LDRReading = analogRead(LDRPin); 
     //delay(500);
     //analogReference(DEFAULT);
     //delay(500);
@@ -105,11 +106,11 @@ void loop() {
     resetCount = 0;
   }
   CloseWater();
-  if (thermReading > 39){
+  if (thermReading > 38 && LDRReading < 440){
     OpenWater();
     numOpens++;
     int addopen = 0;
-    if (thermReading > 41.0f)
+    if (thermReading > 41.0f && LDRReading < 430)
       addopen = 1500;
     totalDuration = totalDuration + (OPEN_TIME + addopen)/1000;
     delay(OPEN_TIME + addopen); // Open for 8 seconds
